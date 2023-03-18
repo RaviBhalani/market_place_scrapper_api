@@ -2,9 +2,9 @@ from random import choice
 
 from bs4 import BeautifulSoup
 from requests import get
+from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.viewsets import GenericViewSet
-from rest_framework.response import Response
 
 from scrapper.constants import (
     DIV,
@@ -23,7 +23,9 @@ from scrapper.constants import (
 )
 from scrapper.helpers import get_required_data, get_required_data_from_nested_tags, get_all_data
 from scrapper.serializers import ScrapperListSerializer
-from scrapper.settings import USER_AGENT_LIST, LANGUAGE, AMAZON_INDIA_URL, PRODUCT_URL_KEY, WEBSITE_PAGE_KEY, PARSER
+from scrapper.settings import (
+    USER_AGENT_LIST, LANGUAGE, AMAZON_INDIA_URL, PRODUCT_URL_KEY, WEBSITE_PAGE_KEY, PARSER, WEBSITE_URL
+)
 
 
 class ScrapperViewSet(GenericViewSet):
@@ -47,7 +49,7 @@ class ScrapperViewSet(GenericViewSet):
             for word in product_word_list[1:]:
                 product_url_value += '+' + word
 
-            url = AMAZON_INDIA_URL + PRODUCT_URL_KEY + product_url_value + WEBSITE_PAGE_KEY + page
+            url = WEBSITE_URL + PRODUCT_URL_KEY + product_url_value + WEBSITE_PAGE_KEY + page
             web_page = get(url, headers=headers)
 
             soup_obj = BeautifulSoup(web_page.content, PARSER)

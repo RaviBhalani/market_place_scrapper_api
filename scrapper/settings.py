@@ -5,6 +5,7 @@ Scrapping Settings Start.
 AMAZON_INDIA_URL = 'https://www.amazon.in/'
 AMAZON_US_URL = 'https://www.amazon.com/'
 
+WEBSITE_URL = AMAZON_INDIA_URL
 PRODUCT_URL_KEY = 's?k='
 WEBSITE_PAGE_KEY = '&page='
 LANGUAGE = 'en-US'
